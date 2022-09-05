@@ -1,5 +1,8 @@
 # react-pokedex
 
--Command to launch app: npm run dev
+-Clone repository
+-Install typing: npm install --legacy-peer-deps
+-Launch project with: npm run dev
+:)
 
 
