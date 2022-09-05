@@ -10,11 +10,12 @@ function App() {
   return (
 
 
-  
+      //se crean las rutas
       <Routes>
         <Route path="/" element={<Pokedex />} />
         <Route path="/:pokemonId" element={<Pokemon />} />
       </Routes>
+
     );
   }
   
