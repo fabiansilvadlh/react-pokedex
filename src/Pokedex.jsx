@@ -12,6 +12,8 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '50px',
     paddingRight: '50px',
     animation: '$float 1s ease-in-out infinite',
+    overflowX: 'hidden',
+    width: '100%'
   },
   card : {
     cursor: 'pointer',
@@ -32,6 +34,8 @@ const useStyles = makeStyles(theme => ({
     paddingRight: '20px',
     marginTop: '5px',
     marginBottom: '5px',
+    
+    
   },
   searchIcon: {
     alignSelf: 'flex-end',
@@ -85,7 +89,7 @@ const Pokedex= () => {
 
     const {name, sprite} = pokemonData[pokemonId];
     return (
-    <Grid item xs={3} key={pokemonId}>
+    <Grid item xs={6} md={3} sm={3} key={pokemonId}>
       <Card
       className={classes.card}
       onClick={() => navigate(`/${pokemonId}`)} >

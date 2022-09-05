@@ -14,6 +14,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     textAlign: 'center',
     fontStyle: 'italic',
+    width: '100%',
+    height: 'auto'
     
 
   },
@@ -37,13 +39,7 @@ pokemonDescription: {
     height: '40px',
     display: 'center',
   },
-  button: {
-    margin: '10px',
-    width: '300px',
-    height: '60px',
-    fontSize: '20px',
 
-  }
 
 }));
 
