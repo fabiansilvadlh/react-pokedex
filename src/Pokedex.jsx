@@ -60,9 +60,9 @@ const Pokedex= () => {
   };
 
 
-  //recepción de datos de la API
+  //getting data from API
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=25`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=905`)
     .then(function (response) {
       const {data} = response;
       const {results} = data;
@@ -84,7 +84,7 @@ const Pokedex= () => {
 
 
 
-  //Creación de cartas de cada Pokemon
+  //Making cards of each pokemon
   const getPokemonCard = (pokemonId) => {
 
     const {name, sprite} = pokemonData[pokemonId];
@@ -107,7 +107,7 @@ const Pokedex= () => {
     );
   };
 
-  //creación del header de la págnia con SearchBar
+  //making page header with search bar
   return (
     <>
     <div

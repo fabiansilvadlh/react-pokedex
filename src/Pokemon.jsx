@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
-import {Typography, capitalize, CircularProgress, Button, Card, CardContent, CardMedia, Grid} from '@material-ui/core'
+import {Typography, capitalize, CircularProgress, Button, Card, CardMedia, Grid} from '@material-ui/core'
 import axios from 'axios';
 import {makeStyles, alpha} from '@material-ui/core/styles';
 
@@ -53,7 +53,7 @@ const Pokemon = () => {
   const [evolution, setEvolution] = useState();
   const classes = useStyles();
 
-  //recepción de datos de la API
+  //getting data from Api
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
     .then(function (response) {
@@ -69,7 +69,7 @@ const Pokemon = () => {
 
   }, [pokemonId]);
 
-  //recepción desde otro sector de la API para la descripción
+  //getting pokemon description from other part of the API
   const getPokemonDescription = () => {
     if(!pokemon) {
       return;
@@ -84,7 +84,7 @@ const Pokemon = () => {
     })
   }
 
-  //recepción desde otro sector de la API para obtener evoluciones del Pokemon
+  //getting evolution chain from other sector of the API
   const getPokemonEvolution = () => {
     if(!pokemon) {
       return;
@@ -112,7 +112,7 @@ const Pokemon = () => {
     })
   }
   
-  //Generación de página donde se depliega la carta con información del Pokemon
+  //Making the pokemon page with the data received from the API
   const generatePokemonJSX = () => {
     getPokemonDescription();
     getPokemonEvolution();
@@ -136,8 +136,8 @@ const Pokemon = () => {
       <CardMedia
       className={classes.cardMedia} 
       style={{width: '300px', height: '300px'}} image={fullImageUrl} />
-      <Typography>Height: {height}</Typography>
-      <Typography>Weight: {weight}</Typography>
+      <Typography>Height: {height} ft</Typography>
+      <Typography>Weight: {weight} lbs</Typography>
       <Typography variant="h6">Types:</Typography>
       {types.map((typeInfo) => {
         const {type} = typeInfo;
@@ -161,6 +161,26 @@ const Pokemon = () => {
           return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/e1/PoisonIC_PE.png" alt="Poison" />
         }else if (name === 'bug') {
           return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/0/06/BugIC_PE.png" alt="Bug" />
+        }else if (name === 'ground') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/b/be/GroundIC_PE.png" alt="Ground" />
+        }else if (name === 'rock') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ed/RockIC_PE.png" alt="Rock" />
+        }else if (name === 'fighting') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/6/64/FightingIC_PE.png" alt="Fighting" />
+        }else if (name === 'psychic') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/3/37/PsychicIC_PE.png" alt="Psychic" />
+        }else if (name === 'ghost') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/7/77/GhostIC_PE.png" alt="Ghost" />
+        }else if (name === 'ice') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/9/94/IceIC_PE.png" alt="Ice" />
+        }else if (name === 'dragon') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/1/1b/DragonIC_PE.png" alt="Dragon" />
+        }else if (name === 'dark') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a2/DarkIC_PE.png" alt="Dark" />
+        }else if (name === 'steel') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/8/81/SteelIC_PE.png" alt="Steel" />
+        }else if (name === 'fairy') {
+          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a4/FairyIC_PE.png" alt="Fairy" />
         }
       })}
       <Typography variant="h4">Description: </Typography>
@@ -180,7 +200,7 @@ const Pokemon = () => {
 
   };
 
-  //Generación de página de error en caso de que el Pokemon no exista en la API
+  //Making error msg in case of wrong Pokemon ID + loading animation
   return (
   <>
     {pokemon === undefined && <CircularProgress/>}
