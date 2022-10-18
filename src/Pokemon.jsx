@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
     fontStyle: 'italic',
     width: '100%',
     height: 'auto'
-    
 
   },
 pokemonDescription: {

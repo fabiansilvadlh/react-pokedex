@@ -7,13 +7,13 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 
 const useStyles = makeStyles(theme => ({
 
+
   pokedexContainer: {
     paddingTop: '20px',
     paddingLeft: '50px',
     paddingRight: '50px',
-    animation: '$float 1s ease-in-out infinite',
     overflowX: 'hidden',
-    width: '100%'
+    width: '100%',
   },
   card : {
     cursor: 'pointer',
@@ -112,7 +112,7 @@ const Pokedex= () => {
     <>
     <div
     className={classes.pokedex}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar >
           <div className={classes.searchContainer}>
             <CatchingPokemonIcon className={classes.searchIcon}/>
