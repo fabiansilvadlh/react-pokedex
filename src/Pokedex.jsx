@@ -51,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 const Pokedex= () => {
 
+  //declarating states needed
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState();
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Pokedex= () => {
   };
 
 
-  //getting data from API
+  //getting data from API to show in the pokemon list
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon?limit=905`)
     .then(function (response) {
@@ -84,7 +85,7 @@ const Pokedex= () => {
 
 
 
-  //Making cards of each pokemon
+  //Making cards of each pokemon using CSS Grid Cards
   const getPokemonCard = (pokemonId) => {
 
     const {name, sprite} = pokemonData[pokemonId];

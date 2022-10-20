@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {Typography, capitalize, CircularProgress, Button, Card, CardMedia, Grid} from '@material-ui/core'
 import axios from 'axios';
 import {makeStyles, alpha} from '@material-ui/core/styles';
+import TypesImg from './typeimg.json';
 
 const useStyles = makeStyles(theme => ({
   
@@ -141,46 +142,10 @@ const Pokemon = () => {
       {types.map((typeInfo) => {
         const {type} = typeInfo;
         const {name} = type;
-        if (name === 'normal') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/c/c6/NormalIC_PE.png" alt="Normal" />
-        }else if (name === 'fire') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ea/FireIC_PE.png" alt="Fire" />
-        }
-        else if (name === 'water') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/e1/WaterIC_PE.png" alt="Water" />
-        }
-        else if (name === 'electric') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ee/ElectricIC_PE.png" alt="Electric" />
-        }
-        else if (name === 'grass') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/3/3f/GrassIC_PE.png" alt="Grass" />
-        }else if (name === 'flying') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/7/76/FlyingIC_PE.png" alt="Flying" />
-        }else if (name === 'poison') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/e1/PoisonIC_PE.png" alt="Poison" />
-        }else if (name === 'bug') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/0/06/BugIC_PE.png" alt="Bug" />
-        }else if (name === 'ground') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/b/be/GroundIC_PE.png" alt="Ground" />
-        }else if (name === 'rock') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ed/RockIC_PE.png" alt="Rock" />
-        }else if (name === 'fighting') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/6/64/FightingIC_PE.png" alt="Fighting" />
-        }else if (name === 'psychic') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/3/37/PsychicIC_PE.png" alt="Psychic" />
-        }else if (name === 'ghost') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/7/77/GhostIC_PE.png" alt="Ghost" />
-        }else if (name === 'ice') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/9/94/IceIC_PE.png" alt="Ice" />
-        }else if (name === 'dragon') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/1/1b/DragonIC_PE.png" alt="Dragon" />
-        }else if (name === 'dark') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a2/DarkIC_PE.png" alt="Dark" />
-        }else if (name === 'steel') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/8/81/SteelIC_PE.png" alt="Steel" />
-        }else if (name === 'fairy') {
-          return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a4/FairyIC_PE.png" alt="Fairy" />
-        }
+        const typeImg = TypesImg.find(type => type.name === name).img;
+        return (
+          <img className={classes.typeImg} src={typeImg} alt={name} />
+        )
       })}
       <Typography variant="h4">Description: </Typography>
       <Typography
@@ -216,3 +181,42 @@ const Pokemon = () => {
 
 
 export default Pokemon;
+
+
+// if (name === 'normal') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/c/c6/NormalIC_PE.png" alt="Normal" />
+// }else if (name === 'fire') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ea/FireIC_PE.png" alt="Fire" />
+// }else if (name === 'water') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/e1/WaterIC_PE.png" alt="Water" />
+// }else if (name === 'electric') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ee/ElectricIC_PE.png" alt="Electric" />
+// }else if (name === 'grass') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/3/3f/GrassIC_PE.png" alt="Grass" />
+// }else if (name === 'flying') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/7/76/FlyingIC_PE.png" alt="Flying" />
+// }else if (name === 'poison') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/e1/PoisonIC_PE.png" alt="Poison" />
+// }else if (name === 'bug') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/0/06/BugIC_PE.png" alt="Bug" />
+// }else if (name === 'ground') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/b/be/GroundIC_PE.png" alt="Ground" />
+// }else if (name === 'rock') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/e/ed/RockIC_PE.png" alt="Rock" />
+// }else if (name === 'fighting') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/6/64/FightingIC_PE.png" alt="Fighting" />
+// }else if (name === 'psychic') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/3/37/PsychicIC_PE.png" alt="Psychic" />
+// }else if (name === 'ghost') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/7/77/GhostIC_PE.png" alt="Ghost" />
+// }else if (name === 'ice') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/9/94/IceIC_PE.png" alt="Ice" />
+// }else if (name === 'dragon') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/1/1b/DragonIC_PE.png" alt="Dragon" />
+// }else if (name === 'dark') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a2/DarkIC_PE.png" alt="Dark" />
+// }else if (name === 'steel') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/8/81/SteelIC_PE.png" alt="Steel" />
+// }else if (name === 'fairy') {
+//   return <img className={classes.typeImg} src="https://archives.bulbagarden.net/media/upload/a/a4/FairyIC_PE.png" alt="Fairy" />
+// }

@@ -5,6 +5,8 @@ import {BrowserRouter} from 'react-router-dom'
 import {createBrowserHistory} from 'history'
 
 
+//declaration of routing
+
 const history = createBrowserHistory();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
