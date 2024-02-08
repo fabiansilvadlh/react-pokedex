@@ -63,7 +63,7 @@ const Pokedex= () => {
 
   //getting data from API to show in the pokemon list
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1008`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1025`)
     .then(function (response) {
       const {data} = response;
       const {results} = data;

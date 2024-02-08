@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
-import {Typography, capitalize, CircularProgress, Button, Card, CardMedia, Grid} from '@material-ui/core'
+import { Typography, capitalize, CircularProgress, Button, Card, CardMedia, Grid } from '@material-ui/core'
 import axios from 'axios';
-import {makeStyles, alpha} from '@material-ui/core/styles';
+import { makeStyles, alpha } from '@material-ui/core/styles';
 import TypesImg from './typeimg.json';
 
 const useStyles = makeStyles(theme => ({
-  
+
   pokemonContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     height: 'auto'
 
   },
-pokemonDescription: {
+  pokemonDescription: {
     margin: '10px',
     textAlign: 'center',
     fontWeight: 'bold',
@@ -46,7 +46,7 @@ pokemonDescription: {
 
 
 const Pokemon = () => {
-  const {pokemonId} = useParams();
+  const { pokemonId } = useParams();
   const [pokemon, setPokemon] = useState(undefined);
   const navigate = useNavigate();
   const [desc, setDesc] = useState();
@@ -56,108 +56,108 @@ const Pokemon = () => {
   //getting data from Api
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-    .then(function (response) {
-      const {data} = response;
-      setPokemon(data);
+      .then(function (response) {
+        const { data } = response;
+        setPokemon(data);
 
-    })
-    .catch(function (error) {
-      setPokemon(false);
-    });
+      })
+      .catch(function (error) {
+        setPokemon(false);
+      });
 
-    
+
 
   }, [pokemonId]);
 
   //getting pokemon description from other part of the API
   const getPokemonDescription = () => {
-    if(!pokemon) {
+    if (!pokemon) {
       return;
     }
-    const {species} = pokemon;
+    const { species } = pokemon;
     axios.get(species.url)
-    .then(function (response) {
-      const {data} = response;
-      const {flavor_text_entries} = data;
-      const description = flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
-      setDesc(description); 
-    })
+      .then(function (response) {
+        const { data } = response;
+        const { flavor_text_entries } = data;
+        const description = flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+        setDesc(description);
+      })
   }
 
   //getting evolution chain from other sector of the API
   const getPokemonEvolution = () => {
-    if(!pokemon) {
+    if (!pokemon) {
       return;
     }
-    const {species} = pokemon;
+    const { species } = pokemon;
     axios.get(species.url)
-    .then(function (response) {
-      const {data} = response;
-      const {evolution_chain} = data;
-      axios.get(evolution_chain.url)
       .then(function (response) {
-        const {data} = response;
-        const {chain} = data;
+        const { data } = response;
+        const { evolution_chain } = data;
+        axios.get(evolution_chain.url)
+          .then(function (response) {
+            const { data } = response;
+            const { chain } = data;
 
-        const evolution = [];
-        evolution.push(chain.species.name);
-        chain.evolves_to.forEach(evolutionStage => {
-          evolution.push(evolutionStage.species.name);
-          evolutionStage.evolves_to.forEach(evolutionStage => {
-            evolution.push(evolutionStage.species.name);
+            const evolution = [];
+            evolution.push(chain.species.name);
+            chain.evolves_to.forEach(evolutionStage => {
+              evolution.push(evolutionStage.species.name);
+              evolutionStage.evolves_to.forEach(evolutionStage => {
+                evolution.push(evolutionStage.species.name);
+              })
+            })
+            setEvolution(evolution);
           })
-        })
-        setEvolution(evolution);
       })
-    })
   }
-  
+
   //Making the pokemon page with the data received from the API
   const generatePokemonJSX = () => {
     getPokemonDescription();
     getPokemonEvolution();
-    const {id, name, height, weight, types, sprites} = pokemon;
+    const { id, name, height, weight, types, sprites } = pokemon;
     const formattedId = `00${id}`.slice(-3) || `0${id}`.slice(-2) || id;
-    
+
     const fullImageUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formattedId}.png`;
-    
-    const {front_default} = sprites;
+
+    const { front_default } = sprites;
     return (
-      
+
       <>
         <Grid className={classes.pokemonContainer}
         >
           <Card className={classes.cardxd}>
-      <Typography variant="h1">
-        {`#${id} ${capitalize(name)}`}
-        <img src={front_default} />
-      </Typography>
-      
-      <CardMedia
-      className={classes.cardMedia} 
-      style={{width: '300px', height: '300px'}} image={fullImageUrl} />
-      <Typography>Height: {height} ft</Typography>
-      <Typography>Weight: {weight} lbs</Typography>
-      <Typography variant="h6">Types:</Typography>
-      {types.map((typeInfo) => {
-        const {type} = typeInfo;
-        const {name} = type;
-        const typeImg = TypesImg.find(type => type.name === name).img;
-        return (
-          <img className={classes.typeImg} src={typeImg} alt={name} />
-        )
-      })}
-      <Typography variant="h4">Description: </Typography>
-      <Typography
-      className={classes.pokemonDescription}
-      >{desc}</Typography>
-      <Typography variant="h4">Evolution chain: </Typography>
-      {evolution && evolution.map((evolutionStage) => {
-        return <Typography key={evolutionStage}>{capitalize(`${evolutionStage}`)}</Typography>
-      })}
-      </Card>
-      </Grid>
-      
+            <Typography variant="h1">
+              {`#${id} ${capitalize(name)}`}
+              <img src={front_default} />
+            </Typography>
+
+            <CardMedia
+              className={classes.cardMedia}
+              style={{ width: '300px', height: '300px' }} image={fullImageUrl} />
+            <Typography>Height: {height} ft</Typography>
+            <Typography>Weight: {weight} lbs</Typography>
+            <Typography variant="h6">Types:</Typography>
+            {types.map((typeInfo) => {
+              const { type } = typeInfo;
+              const { name } = type;
+              const typeImg = TypesImg.find(type => type.name === name).img;
+              return (
+                <img className={classes.typeImg} src={typeImg} alt={name} />
+              )
+            })}
+            <Typography variant="h4">Description: </Typography>
+            <Typography
+              className={classes.pokemonDescription}
+            >{desc}</Typography>
+            <Typography variant="h4">Evolution chain: </Typography>
+            {evolution && evolution.map((evolutionStage) => {
+              return <Typography key={evolutionStage}>{capitalize(`${evolutionStage}`)}</Typography>
+            })}
+          </Card>
+        </Grid>
+
       </>
 
     );
@@ -166,17 +166,17 @@ const Pokemon = () => {
 
   //Making error msg in case of wrong Pokemon ID + loading animation
   return (
-  <>
-    {pokemon === undefined && <CircularProgress/>}
-    {pokemon !== undefined && pokemon && generatePokemonJSX()}
-    {pokemon === false && <Typography>Pokemon not found</Typography>}
-    {pokemon !== undefined && (
-      <Button className={classes.button} variant="contained" onClick={() => navigate('/')}>
-        Back to Pokedex
-      </Button>
-  )}
+    <>
+      {pokemon === undefined && <CircularProgress />}
+      {pokemon !== undefined && pokemon && generatePokemonJSX()}
+      {pokemon === false && <Typography>Pokemon not found</Typography>}
+      {pokemon !== undefined && (
+        <Button className={classes.button} variant="contained" onClick={() => navigate('/')}>
+          Back to Pokedex
+        </Button>
+      )}
 
-  </>);
+    </>);
 };
 
 
